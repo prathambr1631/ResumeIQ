@@ -1,56 +1,27 @@
-import { useEffect, useState } from "react";
-import { checkBackendHealth } from "./services/api";
+import ResumeUpload from "./components/upload/ResumeUpload";
+
 
 function App() {
-  const [backendStatus, setBackendStatus] = useState("Checking...");
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const checkBackend = async () => {
-      try {
-        const data = await checkBackendHealth();
-
-        setBackendStatus(
-          `${data.service} — ${data.status}`
-        );
-      } catch (err) {
-        console.error(err);
-        setBackendStatus("Backend unavailable");
-        setError("Could not connect to the FastAPI backend.");
-      }
-    };
-
-    checkBackend();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-5xl font-bold mb-4">
-          ResumeIQ
-        </h1>
-
-        <p className="text-slate-400 mb-6">
-          Frontend ↔ Backend Connection Test
-        </p>
-
-        <div className="rounded-xl border border-slate-700 bg-slate-900 px-6 py-4">
-          <p className="text-sm text-slate-400 mb-2">
-            Backend Status
-          </p>
-
-          <p className="text-lg font-semibold">
-            {backendStatus}
-          </p>
-
-          {error && (
-            <p className="text-red-400 text-sm mt-3">
-              {error}
+    <main className="min-h-screen bg-slate-950 text-white">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-10 sm:px-10 lg:px-12">
+        <header className="flex items-center justify-between">
+          <div>
+            <p className="text-xl font-semibold tracking-tight">
+              ResumeIQ
             </p>
-          )}
-        </div>
+
+            <p className="mt-1 text-sm text-slate-500">
+              AI-powered resume analysis
+            </p>
+          </div>
+        </header>
+
+        <section className="flex flex-1 items-center justify-center py-16">
+          <ResumeUpload />
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
 

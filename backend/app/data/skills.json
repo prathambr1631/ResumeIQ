@@ -1,0 +1,86 @@
+{
+  "programming_languages": [
+    "Python",
+    "Java",
+    "C",
+    "C++",
+    "JavaScript",
+    "TypeScript",
+    "SQL",
+    "R",
+    "Go",
+    "Rust"
+  ],
+  "data_science": [
+    "NumPy",
+    "Pandas",
+    "Matplotlib",
+    "Seaborn",
+    "Plotly",
+    "SciPy",
+    "Jupyter",
+    "Statistics",
+    "Data Analysis",
+    "Data Visualization"
+  ],
+  "machine_learning": [
+    "Machine Learning",
+    "Deep Learning",
+    "Natural Language Processing",
+    "NLP",
+    "Computer Vision",
+    "Scikit-learn",
+    "TensorFlow",
+    "PyTorch",
+    "Keras",
+    "XGBoost",
+    "LightGBM",
+    "Feature Engineering",
+    "Model Evaluation",
+    "Regression",
+    "Classification",
+    "Clustering"
+  ],
+  "databases": [
+    "MySQL",
+    "PostgreSQL",
+    "SQLite",
+    "MongoDB",
+    "Redis",
+    "SQLAlchemy"
+  ],
+  "web_development": [
+    "HTML",
+    "CSS",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express",
+    "FastAPI",
+    "Flask",
+    "REST API",
+    "REST APIs"
+  ],
+  "cloud_devops": [
+    "AWS",
+    "Azure",
+    "Google Cloud",
+    "Docker",
+    "Kubernetes",
+    "Git",
+    "GitHub",
+    "Linux",
+    "CI/CD"
+  ],
+  "ai_tools": [
+    "Generative AI",
+    "LLM",
+    "Large Language Models",
+    "Transformers",
+    "Hugging Face",
+    "LangChain",
+    "OpenAI API",
+    "RAG",
+    "Retrieval Augmented Generation"
+  ]
+}

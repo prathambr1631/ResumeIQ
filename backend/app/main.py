@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.app.api.analysis import router as analysis_router
 from backend.app.api.database_test import router as database_router
+from backend.app.api.job import router as job_router
+from backend.app.api.resume import router as resume_router
 from backend.app.core.config import settings
 from backend.app.core.database import Base, engine
 from backend.app.models.analysis import Analysis
@@ -43,6 +45,16 @@ app.include_router(
 
 app.include_router(
     analysis_router,
+    prefix=settings.api_prefix,
+)
+
+app.include_router(
+    resume_router,
+    prefix=settings.api_prefix,
+)
+
+app.include_router(
+    job_router,
     prefix=settings.api_prefix,
 )
 
