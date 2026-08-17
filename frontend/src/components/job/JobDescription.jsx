@@ -29,6 +29,7 @@ Requirements:
 
 
 function JobDescription({
+  resumeText = "",
   resumeSkills = [],
   onMatchComplete,
 }) {
@@ -60,6 +61,13 @@ function JobDescription({
     const trimmedDescription =
       jobDescription.trim();
 
+    if (!resumeText.trim()) {
+      setError(
+        "Resume text is unavailable. Please process your resume again."
+      );
+      return;
+    }
+
     if (!trimmedDescription) {
       setError(
         "Please enter a job description first."
@@ -79,6 +87,7 @@ function JobDescription({
 
     try {
       const result = await matchJob(
+        resumeText,
         resumeSkills,
         trimmedDescription
       );
@@ -116,7 +125,6 @@ function JobDescription({
       className="rounded-3xl border border-slate-700 bg-slate-900 p-6 sm:p-8"
     >
       <div className="flex flex-col gap-6">
-        {/* Header */}
         <div className="flex items-start gap-4">
           <motion.div
             whileHover={{
@@ -140,7 +148,6 @@ function JobDescription({
           </div>
         </div>
 
-        {/* Textarea */}
         <motion.div
           animate={{
             borderColor: isFocused
@@ -163,7 +170,6 @@ function JobDescription({
             className="w-full resize-none bg-transparent p-5 text-sm leading-7 text-slate-200 outline-none placeholder:text-slate-600 disabled:cursor-not-allowed disabled:opacity-60"
           />
 
-          {/* Footer */}
           <div className="flex flex-col gap-3 border-t border-slate-800 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <span className="text-xs text-slate-500">
@@ -224,7 +230,6 @@ function JobDescription({
           </div>
         </motion.div>
 
-        {/* Error */}
         <AnimatePresence>
           {error && (
             <motion.div
@@ -251,7 +256,6 @@ function JobDescription({
           )}
         </AnimatePresence>
 
-        {/* Analyze Button */}
         <motion.button
           type="button"
           onClick={handleAnalyze}
@@ -278,7 +282,7 @@ function JobDescription({
           {isAnalyzing ? (
             <>
               <Loader2 className="h-5 w-5 animate-spin" />
-              Analyzing Job Match...
+              Analyzing with AI...
             </>
           ) : (
             <>

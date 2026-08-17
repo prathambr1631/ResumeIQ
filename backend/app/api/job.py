@@ -1,7 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
-from backend.app.services.job_matcher import JobMatcher
+from backend.app.services.hybrid_matcher import HybridMatcher
+from backend.app.services.recommendation_engine import (
+    RecommendationEngine,
+)
 from backend.app.services.skill_extractor import SkillExtractor
 
 
@@ -12,9 +15,14 @@ router = APIRouter(
 
 
 class JobMatchRequest(BaseModel):
+    resume_text: str = Field(
+        min_length=20,
+    )
+
     resume_skills: list[str] = Field(
         default_factory=list,
     )
+
     job_description: str = Field(
         min_length=20,
         max_length=10000,
@@ -27,20 +35,35 @@ def match_job(
 ):
     try:
         skill_extractor = SkillExtractor()
-        job_matcher = JobMatcher()
+        hybrid_matcher = HybridMatcher()
+        recommendation_engine = RecommendationEngine()
 
         job_skills = skill_extractor.get_flat_skills(
             request.job_description
         )
 
-        result = job_matcher.calculate_match(
+        match_result = hybrid_matcher.calculate_match(
+            resume_text=request.resume_text,
             resume_skills=request.resume_skills,
+            job_description=request.job_description,
             job_skills=job_skills,
+        )
+
+        recommendations = (
+            recommendation_engine.generate(
+                missing_skills=match_result[
+                    "missing_skills"
+                ],
+                semantic_score=match_result[
+                    "semantic_score"
+                ],
+            )
         )
 
         return {
             "job_skills": job_skills,
-            **result,
+            **match_result,
+            "recommendations": recommendations,
         }
 
     except ValueError as exc:
@@ -52,5 +75,8 @@ def match_job(
     except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An unexpected error occurred while matching the job.",
+            detail=(
+                "An unexpected error occurred "
+                "while matching the job."
+            ),
         ) from exc
