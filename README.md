@@ -1,174 +1,226 @@
-ResumeIQ
+# ResumeIQ
 
-AI-powered resume intelligence and job matching platform built with Python, FastAPI, React, NLP, and machine learning.
+### AI-Powered Resume Intelligence & Job Matching Platform
 
-🚀 Live Demo — ResumeIQ
+ResumeIQ is a full-stack AI/ML web application that helps students and job seekers understand the quality of their resume, identify their technical skills, compare their profile against a target job description, and discover the skills they should improve.
 
-ResumeIQ is an end-to-end AI/ML web application designed to help students and job seekers understand the quality of their resumes and evaluate how well their skills and experience align with a target job description.
+Instead of acting as a simple keyword-based resume checker, ResumeIQ combines **PDF text extraction, resume structure analysis, skill detection, resume quality scoring, job skill matching, text similarity, and personalized recommendations** into one interactive platform.
 
-The project combines PDF text extraction, rule-based skill detection, resume structure analysis, resume quality scoring, job skill matching, text similarity, recommendations, and an interactive web interface into a single application.
+> **Understand your resume. Understand your opportunities.**
 
-📌 Project Overview
+---
 
-A traditional resume checker often focuses only on keywords.
+## 🚀 Live Demo
 
-ResumeIQ attempts to provide a broader analysis by examining:
+**ResumeIQ:** https://resumeiq-ry78.onrender.com/
 
-Resume structure
-Resume sections
-Technical skills
-Resume content
-Skill distribution
-Job requirements
-Matched skills
-Missing skills
-Text similarity
-Overall resume quality
+The application is deployed using Render with a React/Vite frontend and FastAPI backend.
 
-The system produces both a resume quality score and a job compatibility score.
+---
 
-🎯 Problem Statement
+## ✨ Features
 
-Students and freshers often face two major problems when applying for jobs:
+### 📄 Resume Upload & Extraction
 
-They don't know how strong their resume actually is.
-They don't know whether their resume matches a particular job description.
+* Upload a PDF resume
+* Drag-and-drop file support
+* PDF validation
+* Maximum file size of 5 MB
+* Extract text directly from PDF files using PyMuPDF
+* Display extracted resume content
+* Copy extracted text directly from the interface
 
-Manually comparing a resume with multiple job descriptions is time-consuming.
+---
 
-ResumeIQ attempts to simplify this process by automatically analyzing a resume and comparing it against job requirements.
+### 🧠 Resume Intelligence
 
-💡 Solution
+ResumeIQ analyzes the uploaded resume across multiple dimensions.
 
-ResumeIQ provides two major capabilities.
+The system evaluates:
 
-1. Resume Intelligence
+* Resume sections
+* Technical skills
+* Resume content
+* Resume structure
+* Overall resume quality
 
-Upload a PDF resume and the system analyzes:
+The result is presented through an interactive score visualization.
 
-Resume
-  ↓
-PDF Text Extraction
-  ↓
-Section Detection
-  ↓
-Skill Detection
-  ↓
-Structure Analysis
-  ↓
-Content Analysis
-  ↓
-Resume Quality Score
-2. Job Matching
+Example analysis:
 
-The extracted resume information can then be compared against a job description:
+```text
+Overall Resume Score
+        82%
+       Strong
 
-Resume
-   +
-Job Description
-   ↓
-Skill Matching
-   +
-Text Similarity
-   ↓
-Hybrid Match Score
-   ↓
-Matched Skills
-Missing Skills
-Recommendations
-✨ Features
-📄 Resume Upload
-PDF resume upload
-Drag-and-drop support
-File validation
-Maximum file size of 5 MB
-PDF text extraction using PyMuPDF
-🧠 Resume Skill Detection
+Sections     60%
+Skills      100%
+Content      85%
+Structure   100%
+```
 
-ResumeIQ identifies technical skills from resume content and organizes them into categories.
+---
 
-Current categories include:
+### 🧩 Resume Structure Analysis
 
-Programming Languages
-Data Science
-Machine Learning
-Databases
-Web Development
-Cloud & DevOps
-AI Tools
+ResumeIQ detects common resume sections and shows which sections are present or missing.
 
-Skills are detected using a predefined skill database stored in:
+Currently analyzed sections include:
 
+* Summary
+* Experience
+* Education
+* Skills
+* Projects
+* Certifications
+* Achievements
+* Languages
+
+The system calculates a section coverage score based on the detected structure.
+
+---
+
+### 🛠️ Automatic Skill Detection
+
+ResumeIQ extracts technical skills from the uploaded resume and organizes them into categories.
+
+Current skill categories include:
+
+* Programming
+* Data Science
+* Machine Learning
+* Web Development
+* Cloud & DevOps
+* Databases
+* AI Tools
+
+Skills are detected using a predefined skill database located at:
+
+```text
 backend/app/data/skills.json
+```
 
-The extractor normalizes text and performs controlled skill matching rather than relying entirely on exact raw string comparison.
-
-📊 Resume Quality Analysis
-
-ResumeIQ evaluates a resume across multiple dimensions:
-
-Sections
-Skills
-Content
-Structure
-
-These individual measurements contribute to an overall resume quality score.
-
-The frontend presents the result using an animated score visualization.
+The extracted skills are then visualized using interactive category cards.
 
 Example:
 
-             ┌──────────────┐
-             │              │
-             │      82%     │
-             │    Strong    │
-             │              │
-             └──────────────┘
+```text
+Programming
+├── C
+├── C++
+├── Java
+├── JavaScript
+├── Python
+└── R
 
+Data Science
+├── Jupyter
+└── Pandas
 
-Sections      ████████████░░
-Skills        █████████████░
-Content       ███████████░░░
-Structure     ████████████░░
-🎯 Job Matching
+Machine Learning
+├── Machine Learning
+├── Regression
+└── Scikit-learn
 
-Users can provide a job description and compare it with their resume.
+Web Development
+├── HTML
+├── CSS
+├── React
+├── FastAPI
+└── REST APIs
+```
 
-ResumeIQ calculates:
+---
 
-Skill match score
-Text similarity score
-Overall match score
-Matched skills
-Missing skills
+## 🎯 Job Matching
 
-The matching system is implemented using:
+ResumeIQ allows users to paste a real job description and compare it against their resume.
 
-HybridMatcher
-      │
-      ├── JobMatcher
-      │
-      └── SemanticMatcher
-🔗 Hybrid Matching
+The system analyzes:
 
-The original matching architecture combines two signals:
+* Required skills
+* Skills already present in the resume
+* Missing skills
+* Skill match percentage
+* Text similarity
+* Overall job compatibility
 
-40% Skill Match
-       +
-60% Semantic/Text Similarity
-       =
-Final Match Score
-Skill Matching
+Example:
 
-The JobMatcher normalizes resume and job-description skills and determines:
+```text
+Job Match Score
+      33%
+    Low Match
+
+Skill Match       56%
+Semantic Match    18%
 
 Matched Skills
+├── Git
+├── Machine Learning
+├── Pandas
+├── Python
+└── Scikit-learn
+
 Missing Skills
-Skill Match Percentage
-Semantic Matching
+├── Docker
+├── Model Evaluation
+├── NumPy
+└── SQL
+```
 
-During local development, ResumeIQ uses:
+---
 
+## 🔗 Hybrid Matching System
+
+ResumeIQ uses a hybrid approach instead of depending only on keyword matching.
+
+The matching architecture combines:
+
+```text
+                 Resume
+                   │
+                   ▼
+             Skill Extraction
+                   │
+                   ▼
+            ┌───────────────┐
+            │ Job Matcher   │
+            └───────┬───────┘
+                    │
+              Skill Match
+                    │
+                    ▼
+             ┌───────────────┐
+             │   Semantic    │
+             │    Matcher    │
+             └───────┬───────┘
+                     │
+               Text Similarity
+                     │
+                     ▼
+             Hybrid Match Score
+```
+
+The current scoring architecture uses:
+
+```text
+40% Skill Match
+        +
+60% Semantic / Text Similarity
+        =
+Final Match Score
+```
+
+This allows ResumeIQ to consider both explicit technical skills and broader textual similarity between a resume and a job description.
+
+---
+
+## 🤖 Semantic Matching
+
+During local development, ResumeIQ can use:
+
+```text
 Sentence Transformers
         ↓
 all-MiniLM-L6-v2
@@ -176,124 +228,179 @@ all-MiniLM-L6-v2
 Text Embeddings
         ↓
 Cosine Similarity
+```
 
-This allows the application to compare the meaning of resume and job-description text rather than relying only on exact keywords.
+This allows resume and job-description text to be compared based on semantic similarity rather than only exact keyword overlap.
 
-🧮 Free-Tier Production Optimization
+---
 
-During deployment, the original Sentence Transformer + PyTorch stack exceeded the memory available on free hosting infrastructure.
+## ⚡ Production Optimization
 
-Instead of paying for a larger server, the production architecture was optimized.
+One of the interesting engineering challenges in ResumeIQ was deploying an ML application on free hosting infrastructure.
 
-Local Development
+The original local semantic-matching implementation uses Sentence Transformers and PyTorch.
+
+However, loading the complete transformer stack exceeded the memory available on the free deployment environment.
+
+Instead of removing the semantic matching architecture completely, the application was optimized based on the execution environment.
+
+### Local Development
+
+```text
 Sentence Transformers
         ↓
 all-MiniLM-L6-v2
         ↓
-Embedding Similarity
-Production
+Embeddings
+        ↓
+Cosine Similarity
+```
+
+### Production
+
+```text
 TF-IDF Vectorization
         ↓
 Cosine Similarity
         ↓
 Lightweight Text Similarity
+```
 
-The production matcher therefore avoids loading the large PyTorch/Sentence Transformer stack.
+The environment determines which implementation is used:
 
-The same SemanticMatcher interface is maintained while the implementation switches based on the environment.
-
+```text
 ENVIRONMENT=development
         ↓
 all-MiniLM-L6-v2
 
-
-
-
 ENVIRONMENT=production
         ↓
 TF-IDF
+```
 
-This allowed ResumeIQ to remain deployed on free infrastructure without removing the original ML implementation from the development environment.
+This allows ResumeIQ to remain deployed on resource-constrained infrastructure while preserving the original ML-based architecture for local development.
 
-💡 Recommendation Engine
+---
 
-ResumeIQ also analyzes missing skills and generates recommendations based on the detected gaps.
+## 💡 Personalized Recommendations
+
+ResumeIQ doesn't stop at showing missing skills.
+
+It generates improvement recommendations based on the detected skill gaps.
 
 Recommendations can include:
 
-Missing skills
-Priority
-Reason
-Suggested action
-Potential resume impact
+* Missing skill
+* Skill category
+* Priority
+* Reason for recommendation
+* Suggested action
+* Potential resume impact
 
-This helps move the application beyond simply saying:
+For example:
 
-"You are missing X."
+```text
+Docker
+Category: DevOps
+Priority: High
 
-and toward:
+Why ResumeIQ flagged this:
+Docker appears to be relevant to the target role but
+was not detected in the resume.
 
-"Here is what you could improve."
+Suggested Action:
+Dockerize an existing project and document how to
+build and run it.
 
-🎨 UI/UX
+Resume Impact:
+High
+```
 
-The frontend was designed to feel like a modern AI product rather than a basic form-based application.
+This turns the system from a simple resume checker into a basic **career improvement assistant**.
 
-The UI includes:
+---
 
-Professional dark interface
-Resume/job themed animated background
-Drag-and-drop resume upload
-Animated processing states
-Interactive score visualization
-Animated progress indicators
-Interactive skill cards
-Category-based skill visualization
-Hover animations
-Responsive layouts
-Smooth transitions
-AI-style visual feedback
+## 🎨 User Interface
 
-The UI was developed iteratively, with the initial functional interface later redesigned to improve the overall visual experience.
+ResumeIQ was designed to feel more like a modern AI product than a traditional form-based resume analyzer.
 
-🏗️ System Architecture
-                         ┌─────────────────────┐
-                         │      User           │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │ React Frontend      │
-                         │ Vite + Tailwind     │
-                         │ Framer Motion       │
-                         └──────────┬──────────┘
-                                    │
-                                    │ REST API
-                                    ▼
-                         ┌─────────────────────┐
-                         │ FastAPI Backend     │
-                         └──────────┬──────────┘
-                                    │
-              ┌─────────────────────┼─────────────────────┐
-              │                     │                     │
-              ▼                     ▼                     ▼
-       ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-       │ Resume      │       │ Resume      │       │ Job         │
-       │ Service     │       │ Analysis    │       │ Matching    │
-       └──────┬──────┘       └──────┬──────┘       └──────┬──────┘
-              │                     │                     │
-              ▼                     ▼                     ▼
-       ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-       │ PyMuPDF     │       │ Skills      │       │ Hybrid      │
-       │             │       │ Sections    │       │ Matcher     │
-       └─────────────┘       │ Quality     │       └──────┬──────┘
-                             └─────────────┘              │
-                                                         ▼
-                                                  ┌─────────────┐
-                                                  │ Results &   │
-                                                  │ Recommend.  │
-                                                  └─────────────┘
-🔄 Complete Workflow
+The interface includes:
+
+* Dark AI-inspired interface
+* Animated background
+* Modern dashboard-style cards
+* Smooth transitions
+* Animated score visualizations
+* Interactive skill cards
+* Resume upload interface
+* Job description analysis
+* Match score visualization
+* Skill gap visualization
+* Recommendation cards
+* Progress indicators
+* Responsive layouts
+* Hover interactions
+* AI-style status indicators
+
+The application was developed iteratively, with the initial functional interface later redesigned into the current visual experience.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                         ┌──────────────────┐
+                         │       User       │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                    ┌─────────────────────────┐
+                    │     React Frontend      │
+                    │                         │
+                    │ Vite + Tailwind CSS     │
+                    │ Framer Motion            │
+                    │ Axios                    │
+                    └────────────┬────────────┘
+                                 │
+                              REST API
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │     FastAPI Backend     │
+                    └────────────┬────────────┘
+                                 │
+             ┌───────────────────┼───────────────────┐
+             │                   │                   │
+             ▼                   ▼                   ▼
+     ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+     │    Resume    │    │    Resume    │    │     Job      │
+     │   Service    │    │   Analysis   │    │   Matching   │
+     └──────┬───────┘    └──────┬───────┘    └──────┬───────┘
+            │                   │                   │
+            ▼                   ▼                   ▼
+       ┌─────────┐       ┌─────────────┐      ┌─────────────┐
+       │ PyMuPDF │       │ Skill       │      │ Hybrid      │
+       │         │       │ Extraction  │      │ Matcher     │
+       └─────────┘       └─────────────┘      └──────┬──────┘
+                                                     │
+                                      ┌──────────────┼──────────────┐
+                                      │                             │
+                                      ▼                             ▼
+                               Skill Matching              Text Similarity
+                                      │                             │
+                                      └──────────────┬──────────────┘
+                                                     ▼
+                                            Match Score
+                                                     │
+                                                     ▼
+                                            Recommendations
+```
+
+---
+
+## 🔄 Complete Workflow
+
+```text
                     PDF Resume
                         │
                         ▼
@@ -302,80 +409,123 @@ The UI was developed iteratively, with the initial functional interface later re
                 └───────┬───────┘
                         │
                         ▼
-                ┌───────────────┐
-                │ Resume Text   │
-                └───────┬───────┘
+                  Resume Text
                         │
           ┌─────────────┼─────────────┐
           │             │             │
           ▼             ▼             ▼
-      Sections        Skills       Content
+      Sections       Skills        Content
           │             │             │
           └─────────────┼─────────────┘
                         ▼
-                Resume Quality
-                     Score
+              Resume Quality Score
+                        │
+                        ▼
+                Resume Intelligence
+                        │
+                        │
+                + Job Description
                         │
                         ▼
                 ┌───────────────┐
-                │ Job Description│
+                │ Job Skill Match│
                 └───────┬───────┘
                         │
+                        +
+                        │
+                ┌───────▼────────┐
+                │ Text Similarity│
+                └───────┬────────┘
+                        │
                         ▼
-               ┌────────────────┐
-               │ Job Skill Match│
-               └───────┬────────┘
-                       │
-                       +
-               ┌───────▼────────┐
-               │ Text Similarity │
-               └───────┬────────┘
-                       │
-                       ▼
-                Hybrid Match Score
-                       │
-             ┌─────────┴─────────┐
-             ▼                   ▼
-      Matched Skills       Missing Skills
-                                   │
-                                   ▼
-                           Recommendations
-🛠️ Technology Stack
-Frontend
-React
-Vite
-Tailwind CSS
-Framer Motion
-Lucide React
-Axios
-Backend
-Python
-FastAPI
-Uvicorn
-Pydantic
-SQLAlchemy
-AI / ML / NLP
-Sentence Transformers
-scikit-learn
-NumPy
-Pandas
-spaCy ecosystem was explored during development, but the final backend implementation does not directly import spaCy.
-Resume Processing
-PyMuPDF
-Database
-SQLite
-SQLAlchemy
-Development & Deployment
-Git
-GitHub
-Ubuntu/Linux
-Python virtual environments
-Render
-📁 Project Structure
+                 Hybrid Match Score
+                        │
+             ┌──────────┴──────────┐
+             ▼                     ▼
+       Matched Skills        Missing Skills
+                                     │
+                                     ▼
+                             Recommendations
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+| Technology    | Purpose                       |
+| ------------- | ----------------------------- |
+| React         | Frontend application          |
+| Vite          | Development and build tooling |
+| Tailwind CSS  | Styling                       |
+| Framer Motion | Animations and transitions    |
+| Lucide React  | UI icons                      |
+| Axios         | API communication             |
+
+---
+
+## Backend
+
+| Technology | Purpose               |
+| ---------- | --------------------- |
+| Python     | Core backend language |
+| FastAPI    | REST API framework    |
+| Uvicorn    | ASGI server           |
+| Pydantic   | Data validation       |
+| SQLAlchemy | Database ORM          |
+
+---
+
+## AI / ML / NLP
+
+| Technology            | Purpose                      |
+| --------------------- | ---------------------------- |
+| Sentence Transformers | Semantic text embeddings     |
+| all-MiniLM-L6-v2      | Local semantic model         |
+| scikit-learn          | TF-IDF and cosine similarity |
+| NumPy                 | Numerical processing         |
+| Pandas                | Data processing              |
+
+---
+
+## Resume Processing
+
+| Technology | Purpose             |
+| ---------- | ------------------- |
+| PyMuPDF    | PDF text extraction |
+
+---
+
+## Database
+
+| Technology | Purpose                    |
+| ---------- | -------------------------- |
+| SQLite     | Local application database |
+| SQLAlchemy | Database abstraction       |
+
+---
+
+## Development & Deployment
+
+| Technology                 | Purpose                 |
+| -------------------------- | ----------------------- |
+| Git                        | Version control         |
+| GitHub                     | Source code hosting     |
+| Ubuntu/Linux               | Development environment |
+| Python Virtual Environment | Dependency isolation    |
+| Render                     | Cloud deployment        |
+
+---
+
+# 📁 Project Structure
+
+```text
 ResumeIQ/
 │
 ├── backend/
 │   └── app/
+│       │
 │       ├── api/
 │       │   ├── analysis.py
 │       │   ├── database_test.py
@@ -413,6 +563,7 @@ ResumeIQ/
 │
 ├── frontend/
 │   └── src/
+│       │
 │       ├── components/
 │       │   ├── analysis/
 │       │   │   └── ResumeScore.jsx
@@ -443,350 +594,598 @@ ResumeIQ/
 ├── requirements.txt
 ├── requirements-render.txt
 ├── .python-version
+├── .gitignore
 ├── resumeiq.db
 └── README.md
-⚙️ Local Installation
-1. Clone the repository
+```
+
+---
+
+# ⚙️ Local Installation
+
+## 1. Clone the Repository
+
+```bash
 git clone https://github.com/prathambr1631/ResumeIQ.git
 cd ResumeIQ
-2. Create a virtual environment
+```
+
+---
+
+## 2. Create a Python Virtual Environment
+
+ResumeIQ is developed using Python 3.12.
+
+```bash
 python3.12 -m venv .venv
+```
 
-Activate it:
+Activate the environment:
 
+### Linux / macOS
+
+```bash
 source .venv/bin/activate
-3. Install Python dependencies
+```
+
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+---
+
+## 3. Install Backend Dependencies
+
+```bash
 pip install -r requirements.txt
-4. Install frontend dependencies
+```
+
+---
+
+## 4. Install Frontend Dependencies
+
+```bash
 cd frontend
 npm install
-▶️ Running Locally
+```
 
-ResumeIQ requires the backend and frontend to run simultaneously.
+---
 
-Backend
+# ▶️ Running Locally
 
-Terminal 1:
+ResumeIQ requires the frontend and backend to run simultaneously during local development.
 
-cd ~/ResumeIQ
+## Start the Backend
+
+Open Terminal 1:
+
+```bash
+cd ResumeIQ
 source .venv/bin/activate
+
 uvicorn backend.app.main:app --reload
+```
 
 Backend:
 
+```text
 http://127.0.0.1:8000
+```
 
-API documentation:
+FastAPI documentation:
 
+```text
 http://127.0.0.1:8000/docs
-Frontend
+```
 
-Terminal 2:
+---
 
-cd ~/ResumeIQ/frontend
+## Start the Frontend
+
+Open Terminal 2:
+
+```bash
+cd ResumeIQ/frontend
 npm run dev
+```
 
 Frontend:
 
+```text
 http://localhost:5173
-🔌 API Endpoints
-Health Check
+```
+
+---
+
+# 🔌 API Endpoints
+
+## Health Check
+
+```http
 GET /health
+```
 
 Example response:
 
+```json
 {
   "status": "healthy",
   "service": "ResumeIQ API",
   "environment": "production"
 }
-Resume Extraction
+```
+
+---
+
+## Resume Extraction
+
+```http
 POST /api/resumes/extract
+```
 
-Accepts a PDF resume and processes its contents.
+Accepts a PDF resume and extracts its text for analysis.
 
-Job Matching
+---
+
+## Job Matching
+
+```http
 POST /api/jobs/match
+```
 
-Compares resume information against a supplied job description.
+Compares the extracted resume information against a supplied job description.
 
-API Documentation
+---
 
-FastAPI automatically provides interactive documentation at:
+## API Documentation
 
+FastAPI automatically provides interactive API documentation:
+
+```text
 /docs
-☁️ Deployment
+```
+
+---
+
+# ☁️ Deployment
 
 ResumeIQ is deployed using Render.
 
+```text
+                 Production
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+          ▼                     ▼
+   React + Vite            FastAPI
+   Static Site             Web Service
+          │                     │
+          └──────────┬──────────┘
+                     │
+                   REST API
+```
+
+### Production Environment
+
+```text
 Frontend
 React + Vite
         ↓
 Render Static Site
-        ↓
-https://resumeiq-ry78.onrender.com
+
 Backend
 FastAPI
         ↓
 Render Web Service
-        ↓
-https://resumeiq-api-python.onrender.com
+```
 
-The frontend communicates with the backend using the production API URL:
+The frontend communicates with the deployed FastAPI backend through the configured production API URL.
 
-https://resumeiq-api-python.onrender.com
+CORS is configured on the backend to allow communication with the deployed frontend.
 
-CORS is configured on the backend to allow requests from the deployed frontend.
+---
 
-🔐 Environment Variables
-Frontend
+# 🔐 Environment Variables
+
+## Frontend
 
 The frontend uses:
 
+```text
 VITE_API_URL
+```
 
 Example:
 
+```env
 VITE_API_URL=https://resumeiq-api-python.onrender.com
+```
 
 For local development, the application can fall back to:
 
+```text
 http://127.0.0.1:8000
-Backend
+```
 
-Important backend configuration values include:
+---
 
+## Backend
+
+Important configuration values include:
+
+```env
 ENVIRONMENT
 ALLOWED_ORIGINS
 DATABASE_URL
+```
 
 Production uses:
 
+```env
 ENVIRONMENT=production
-🧪 Testing & Verification
+```
 
-The project was tested incrementally during development.
+---
 
-Backend
-FastAPI startup
-Health endpoint
-API documentation
-Resume processing
-Job matching
-Production matcher
-ML
+# 🧪 Testing & Verification
 
-Local semantic matching was tested using:
+ResumeIQ was tested incrementally throughout development.
 
+### Backend
+
+Verified:
+
+* FastAPI startup
+* Health endpoint
+* API documentation
+* Resume processing
+* PDF extraction
+* Skill detection
+* Resume scoring
+* Job matching
+* Recommendation generation
+* Production matcher
+
+### Semantic Matching
+
+Local development:
+
+```text
 all-MiniLM-L6-v2
+```
 
-Production matching was tested using:
+Production:
 
-TF-IDF + cosine similarity
-Frontend
+```text
+TF-IDF + Cosine Similarity
+```
 
-Production build was verified using:
+### Frontend
 
+Production build verified using:
+
+```bash
 npm run build
+```
 
-The Vite production build completed successfully.
+### End-to-End Testing
 
-Deployment
+The deployed application was tested through the complete workflow:
 
-The deployed application was tested end-to-end:
-
+```text
 Live Frontend
       ↓
 Live Backend
       ↓
-Resume Analysis
+Resume Upload
+      ↓
+PDF Extraction
       ↓
 Skill Detection
       ↓
-Resume Scoring
+Resume Analysis
+      ↓
+Resume Score
+      ↓
+Job Description
       ↓
 Job Matching
-🧠 Development Journey
+      ↓
+Missing Skills
+      ↓
+Recommendations
+```
 
-ResumeIQ was developed iteratively rather than being built as a single application in one step.
+---
 
-The major development stages were:
+# 🧠 Development Journey
 
-Phase 1 — Backend Foundation
-FastAPI application architecture
-API routing
-Configuration
-Database setup
-Resume processing foundation
-Phase 2 — Resume Intelligence
-PDF extraction
-Resume section detection
-Skill database
-Skill extraction
-Resume quality analysis
-Phase 3 — Job Matching
-Job skill matching
-Missing skill detection
-Semantic similarity
-Hybrid matching
-Recommendation engine
-Phase 4 — Frontend
-React/Vite application
-Resume upload interface
-API integration
-Analysis components
-Job matching interface
-Phase 5 — UI/UX
+ResumeIQ was developed iteratively rather than being created as a single finished application.
+
+## Phase 1 — Backend Foundation
+
+* FastAPI application architecture
+* API routing
+* Configuration
+* Database setup
+* Resume processing foundation
+
+## Phase 2 — Resume Intelligence
+
+* PDF extraction
+* Resume section detection
+* Skill database
+* Skill extraction
+* Resume quality analysis
+
+## Phase 3 — Job Matching
+
+* Job skill matching
+* Missing skill detection
+* Semantic similarity
+* Hybrid matching
+* Recommendation engine
+
+## Phase 4 — Frontend
+
+* React/Vite application
+* Resume upload interface
+* API integration
+* Resume analysis components
+* Job matching interface
+
+## Phase 5 — UI/UX
 
 The initial functional UI was redesigned to provide:
 
-Better visual hierarchy
-Professional color system
-Animations
-Interactive score visualization
-Interactive skill cards
-Animated background
-Better responsive behavior
-Phase 6 — Deployment
-GitHub repository setup
-Production environment
-Render backend
-Free-tier memory optimization
-Production frontend
-CORS configuration
-End-to-end live testing
-🤖 LLM / AI-Assisted Development
+* Better visual hierarchy
+* Modern dark interface
+* Animated background
+* Interactive score visualization
+* Interactive skill cards
+* Smooth transitions
+* Improved responsive behavior
+
+## Phase 6 — Deployment
+
+* GitHub repository setup
+* Production configuration
+* Render deployment
+* CORS configuration
+* Free-tier memory optimization
+* Production frontend
+* End-to-end live testing
+
+---
+
+# 🤖 AI-Assisted Development
 
 An LLM was used as a development assistant throughout the project.
 
 Its role included assistance with:
 
-Understanding technical concepts
-Project architecture discussions
-Debugging
-Troubleshooting errors
-Code suggestions
-Refactoring ideas
-UI/UX ideas
-Deployment troubleshooting
-Git/GitHub guidance
-Documentation
-Explaining errors and implementation decisions
+* Understanding technical concepts
+* Architecture discussions
+* Debugging
+* Troubleshooting
+* Code suggestions
+* Refactoring ideas
+* UI/UX ideas
+* Deployment troubleshooting
+* Git/GitHub guidance
+* Documentation
+* Explaining implementation decisions
 
-The project was developed iteratively by implementing, running, testing, debugging, and modifying the code in the local development environment.
+The application was still developed iteratively through the process of:
 
-The LLM was therefore used as a development and learning tool, rather than treating generated code as an automatically completed project.
+```text
+Implement
+   ↓
+Run
+   ↓
+Test
+   ↓
+Debug
+   ↓
+Modify
+   ↓
+Repeat
+```
 
-⚠️ Current Limitations
+AI assistance was therefore used as a development and learning tool rather than treating generated code as an automatically completed project.
+
+---
+
+# ⚠️ Current Limitations
 
 ResumeIQ is currently a student/developer project and has several limitations.
 
-Semantic Matching
+## Semantic Matching
 
 The production deployment uses TF-IDF instead of the Sentence Transformer model because of free-tier memory constraints.
 
-Therefore, production semantic matching is not identical to the local embedding-based implementation.
+Therefore:
 
-Skill Detection
+```text
+Local Semantic Matching
+        ≠
+Production Text Similarity
+```
+
+The local environment provides the more advanced embedding-based implementation.
+
+---
+
+## Skill Detection
 
 Skill detection currently relies on the predefined skill database.
 
-A skill that is not present in the database may not be detected automatically.
+Therefore, a technical skill that is not present in:
 
-PDF Processing
+```text
+backend/app/data/skills.json
+```
+
+may not be detected automatically.
+
+---
+
+## PDF Processing
 
 The current implementation primarily works with text-based PDF resumes.
 
-Scanned/image-only resumes may require OCR support.
+Scanned or image-only resumes may require OCR support.
 
-Database
+---
 
-The current project uses SQLite for its database layer.
+## Database
 
-A production-scale deployment would benefit from a managed database such as PostgreSQL.
+The current application uses SQLite.
 
-🚧 Future Improvements
+For a production-scale application, a managed relational database such as PostgreSQL would be more appropriate.
 
-Possible future improvements include:
+---
 
-OCR for scanned resumes
-Larger skill database
-Advanced NLP-based skill extraction
-Better semantic ranking
-Resume improvement suggestions
-ATS compatibility analysis
-Resume keyword optimization
-Job recommendation system
-User authentication
-Resume version management
-User profiles
-Resume history
-PostgreSQL deployment
-Cloud-based ML inference
-LinkedIn integration
-Personalized career roadmap
-More advanced job ranking
-🎓 What I Learned
+# 🚧 Future Improvements
+
+Potential future improvements include:
+
+* OCR support for scanned resumes
+* Larger skill database
+* Advanced NLP-based skill extraction
+* Improved semantic ranking
+* More advanced resume recommendations
+* ATS compatibility analysis
+* Resume keyword optimization
+* Automated job recommendation
+* User authentication
+* User profiles
+* Resume version management
+* Resume history
+* PostgreSQL deployment
+* Cloud-based ML inference
+* LinkedIn integration
+* Personalized career roadmap
+* Advanced job ranking
+* Learning resource recommendations
+
+---
+
+# 🎓 What I Learned
 
 Building ResumeIQ provided hands-on experience with:
 
-Python backend development
-FastAPI
-REST APIs
-React
-Vite
-Tailwind CSS
-Framer Motion
-PDF processing
-NLP concepts
-Text similarity
-Machine learning workflows
-Sentence Transformers
-TF-IDF
-Cosine similarity
-SQLAlchemy
-SQLite
-Environment variables
-CORS
-Git/GitHub
-Linux development
-Cloud deployment
-Free-tier resource optimization
-Debugging production deployments
+* Python backend development
+* FastAPI REST APIs
+* React
+* Vite
+* Tailwind CSS
+* Framer Motion
+* PDF processing
+* NLP concepts
+* Text similarity
+* Machine learning workflows
+* Sentence Transformers
+* TF-IDF
+* Cosine similarity
+* SQLAlchemy
+* SQLite
+* Environment variables
+* CORS
+* Git/GitHub
+* Linux development
+* Cloud deployment
+* Free-tier resource optimization
+* Debugging production applications
 
-One of the most valuable parts of the project was learning that an ML solution that works locally may require architectural changes when deployed under strict resource constraints.
+One of the most valuable lessons from this project was understanding that an ML solution that works locally may need architectural changes when deployed under strict resource constraints.
 
-🚀 Future Vision
+The production TF-IDF optimization is an example of adapting an ML architecture to real-world infrastructure limitations.
 
-ResumeIQ can eventually evolve from a resume analyzer into a broader AI career assistant capable of helping users:
+---
 
-Resume
-   ↓
-Skills
-   ↓
-Career Profile
-   ↓
-Job Matching
-   ↓
-Skill Gaps
-   ↓
-Learning Recommendations
-   ↓
-Career Roadmap
-👨‍💻 Author
+# 🔮 Future Vision
 
-Pratham B R
+ResumeIQ can eventually evolve from a resume analyzer into a broader AI-powered career assistant.
+
+The long-term concept is:
+
+```text
+                    Resume
+                       │
+                       ▼
+                 Skill Profile
+                       │
+                       ▼
+                Career Profile
+                       │
+                       ▼
+                 Job Matching
+                       │
+                       ▼
+                  Skill Gaps
+                       │
+                       ▼
+             Learning Recommendations
+                       │
+                       ▼
+                Career Roadmap
+```
+
+The goal would be to help users move from:
+
+> "Is my resume good?"
+
+to:
+
+> "What should I learn and improve to become a stronger candidate for the jobs I want?"
+
+---
+
+# 📌 Project Highlights
+
+```text
+✓ Full-stack AI/ML application
+✓ React + FastAPI architecture
+✓ PDF resume processing
+✓ Automated skill extraction
+✓ Resume quality scoring
+✓ Resume structure analysis
+✓ Job description matching
+✓ Hybrid skill + text matching
+✓ Semantic matching architecture
+✓ TF-IDF production optimization
+✓ Personalized skill-gap recommendations
+✓ SQLite database integration
+✓ REST API
+✓ Responsive interactive UI
+✓ Production deployment
+✓ Free-tier ML optimization
+```
+
+---
+
+# 👨‍💻 Author
+
+**Pratham B R**
 
 BTech AI & ML Student
 
-GitHub:
+GitHub: `github.com/prathambr1631`
 
-github.com/prathambr1631
+---
 
-Project:
+# 📄 License
 
-ResumeIQ on GitHub
+This project is intended primarily as a learning and portfolio project.
 
-Live Application:
+If you use or modify the project, please provide appropriate attribution to the original repository.
 
-ResumeIQ Live Demo
+
+
+### ResumeIQ
+
+**Understand your resume.
+Understand your opportunities.**
