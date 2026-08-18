@@ -1,16 +1,12 @@
-import axios from "axios";
-
-
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-
+import api from "./api";
 
 export async function matchJob(
   resumeText,
   resumeSkills,
   jobDescription
 ) {
-  const response = await axios.post(
-    `${API_BASE_URL}/jobs/match`,
+  const response = await api.post(
+    "/api/jobs/match",
     {
       resume_text: resumeText,
       resume_skills: resumeSkills,
