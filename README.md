@@ -1169,9 +1169,9 @@ to:
 
 # 👨‍💻 Author
 
-**Pratham B R**
+**Pratham B R  |  BTECH : CSE(AIML)**
 
-BTech AI & ML Student
+JAIN (Deemed-to-be-University)
 
 GitHub: `github.com/prathambr1631`
 
